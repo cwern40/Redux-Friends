@@ -28,7 +28,7 @@ export default function(state= initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                friends: action.payload,
+                friends: action.payload.data,
                 errorMessage: null,
             }
         }
