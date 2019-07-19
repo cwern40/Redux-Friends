@@ -4,6 +4,10 @@ import { getFriends } from '../actions';
 
 class Friendslist extends React.Component {
 
+    componentDidMount() {
+        this.props.getFriends()
+    }
+
     render(){
         console.log('Friends List', this.props)
         return (

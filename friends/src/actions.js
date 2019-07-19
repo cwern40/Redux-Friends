@@ -10,10 +10,10 @@ export function getFriends() {
         dispatch({ type: GET_FRIENDS_START})
         axios.get('http://localhost:5000/api/friends')
             .then((res) => {
-                dispatch({ type: GET_FRIENDS_SUCCESS, payload: res.data})
+                dispatch({ type: GET_FRIENDS_SUCCESS, payload: res})
             })
             .catch((err) => {
-                dispatch({ type: GET_FRIENDS_FAILED, payload: err.reponse.data})
+                dispatch({ type: GET_FRIENDS_FAILED, payload: err.reponse})
             })
     }
 }
