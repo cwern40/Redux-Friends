@@ -6,7 +6,12 @@ export const GET_FRIENDS_FAILED = 'GET_FRIENDS_SUCCESS'
 
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILED = 'LOGIN_FAILED' 
+export const LOGIN_FAILED = 'LOGIN_FAILED'
+
+export const ADD_FRIEND_START = 'ADD_FRIEND_START'
+export const ADD_FRIEND_SUCCESS ='ADD_FRIEND_SUCCESS'
+export const ADD_FRIEND_FAILED = 'ADD_FRIEND_FAILED'
+
 
 //creating funtion to fetch the friends list from the database
 export function getFriends() {
@@ -39,6 +44,24 @@ export function login(username, password) {
             .catch((err) => {
                 console.log('error', err)
                 dispatch({ type: LOGIN_FAILED, err})
+            })
+    }
+}
+
+export function addFriend(name, email, age) {
+    return (dispatch) => {
+        dispatch({ type: ADD_FRIEND_START })
+        const friend = {name: name,
+                        email: email,
+                        age: parseInt(age)}
+        axios.post('http://localhost:5000/api/friends', friend)
+            .then((res) => {
+                console.log(res)
+                dispatch({ type: ADD_FRIEND_SUCCESS })
+            })
+            .catch((err) => {
+                console.log(err)
+                dispatch({ type: ADD_FRIEND_FAILED })
             })
     }
 }
