@@ -43,25 +43,27 @@ export function login(username, password) {
             })
             .catch((err) => {
                 console.log('error', err)
-                dispatch({ type: LOGIN_FAILED, err})
+                dispatch({ type: LOGIN_FAILED, payload: err})
             })
     }
 }
 
-export function addFriend(name, email, age) {
+export function addFriend(friend) {
     return (dispatch) => {
         dispatch({ type: ADD_FRIEND_START })
-        const friend = {name: name,
-                        email: email,
-                        age: parseInt(age)}
+
+        const headers = {
+            Authorization: localStorage.getItem('token')
+        }
+
         axios.post('http://localhost:5000/api/friends', friend)
             .then((res) => {
                 console.log(res)
-                dispatch({ type: ADD_FRIEND_SUCCESS })
+                dispatch({ type: ADD_FRIEND_SUCCESS, payload: res })
             })
             .catch((err) => {
                 console.log(err)
-                dispatch({ type: ADD_FRIEND_FAILED })
+                dispatch({ type: ADD_FRIEND_FAILED, payload: err })
             })
     }
 }

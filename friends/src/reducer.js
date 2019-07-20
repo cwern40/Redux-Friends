@@ -4,7 +4,10 @@ import {
     GET_FRIENDS_FAILED,
     LOGIN_START,
     LOGIN_SUCCESS,
-    LOGIN_FAILED
+    LOGIN_FAILED,
+    ADD_FRIEND_START,
+    ADD_FRIEND_SUCCESS,
+    ADD_FRIEND_FAILED,
 } from './actions'
 
 const initialState = {
@@ -57,8 +60,31 @@ export default function(state= initialState, action) {
             return{
                 ...state,
                 isloading: false,
-                errorMessage: null
+                errorMessage: action.payload
             }   
+        }
+        case ADD_FRIEND_START: {
+            return {
+                ...state,
+                isloading: true,
+                errorMessage: null,
+            }
+        }
+        case ADD_FRIEND_SUCCESS: {
+            console.log('add friend success', action.payload)
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: null,
+            }
+        }
+        case ADD_FRIEND_FAILED: {
+            console.log('add friend failed', action)
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: action.payload,
+            }
         }
         default:
             return state
